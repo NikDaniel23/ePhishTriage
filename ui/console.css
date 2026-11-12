@@ -357,3 +357,11 @@ html, [data-testid="stMain"] { scroll-behavior: smooth; }
 /* the ePhishTriage wordmark in the sidebar header */
 [data-testid="stSidebarHeader"] img, [data-testid="stHeaderLogo"] { height: 1.6rem; max-width: 12rem; object-fit: contain; }
 .welcome { margin-top: 4vh; }
+
+/* primary action buttons on the tool pages share the lavender style */
+.st-key-check-now button, .st-key-extract button { background: var(--lav); color: var(--lav-ink); border: 0;
+  font-family: var(--mono); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.st-key-check-now button p, .st-key-extract button p { font-family: var(--mono); font-weight: 600; color: var(--lav-ink); }
+@media (hover: hover) and (pointer: fine) {
+  .st-key-check-now button:hover, .st-key-extract button:hover { background: #d6d8ff; }
+}

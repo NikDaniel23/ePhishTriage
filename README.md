@@ -37,6 +37,11 @@ ePhishTriage does that groundwork and shows its evidence. **The analyst still de
 - Your decision: the analyst's final verdict is saved, and the agreement rate with the tool is shown
 - A Markdown ticket ready to paste, with every indicator defanged
 
+**Beyond triage** (tabs along the top of the app)
+- **Shift report**: reports per day by verdict, what is still open, attack types, most targeted staff, tool-vs-analyst agreement, and a handover note ready to paste into the shift log
+- **Domain watch**: searches public Certificate Transparency logs (crt.sh) for look-alikes of your own and your suppliers' domains, so they can be blocked before the first phishing email arrives. Review each one, then export a block list or a hunt query
+- **IOC workbench**: paste a threat report, advisory or chat message (defanged text is fine); every URL, domain, IP, address, hash and CVE is extracted, looked up, and exported as a validated block list, a defanged list or a ticket table
+
 ## Installation
 
 ePhishTriage runs on your own computer. Nothing is uploaded anywhere: the dashboard is a local web page at `http://localhost:8501` that only your machine can open.
@@ -197,7 +202,15 @@ The suite includes every challenge email that once beat the tool, kept as perman
 ## Project layout
 
 ```
-app.py              dashboard (Streamlit)
+app.py              entry point: theme and top navigation
+app_pages/
+  triage.py         Triage: analyse reported emails, one or a whole queue
+  shift.py          Shift report
+  watch.py          Domain watch
+  workbench.py      IOC workbench
+ui/
+  kit.py            display helpers shared by every page (escaping lives here)
+  console.css       dashboard styles
 cli.py              command-line version
 run.ps1             start with API keys from Infisical
 org.json            your domains, executives and suppliers
@@ -213,9 +226,11 @@ triage/
   history.py        case history, campaigns, analyst decisions
   respond.py        hunt queries, block list, reporter reply
   sanitize.py       making attacker text safe to display
-samples/            fictional sample emails and demo intel
+  shift.py          shift metrics and the handover note
+  watch.py          certificate-log look-alike search
+  workbench.py      refang, extract and look up indicators in any text
+samples/            fictional sample emails, demo intel, demo certificates, example advisory
 tests/              test suite and challenge-email fixtures
-ui/console.css      dashboard styles
 GUIDE.md            how each part works and why
 ```
 
@@ -225,6 +240,8 @@ GUIDE.md            how each part works and why
 - **Attacker text is never rendered.** Subjects, names, file names and link text are escaped and defanged before they reach the dashboard or the ticket.
 - **Indicators leave the tool only after validation.** Hunt queries and block lists need real values, so each one must match a strict pattern, free text is never put into a query, and CSV cells are guarded against formula injection.
 - **Case history is local** (`.cache/cases.db`, git-ignored). It holds senders and subjects of reported mail: treat it as sensitive.
+- **Outside data stays data.** Certificate-log names and pasted text are validated against strict patterns before they are stored, displayed, exported or put in a query; hostile names (HTML, spreadsheet formulas) are dropped.
+- **Domain watch in live mode sends your watched names to crt.sh**, a public service. Certificate logs are public anyway, but it is your organisation's list of interests.
 
 ## Limitations
 

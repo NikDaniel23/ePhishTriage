@@ -49,7 +49,43 @@ CREATE TABLE IF NOT EXISTS anchors (
     UNIQUE (case_id, kind, value)
 );
 CREATE INDEX IF NOT EXISTS anchors_value ON anchors (kind, value);
+CREATE TABLE IF NOT EXISTS watch_hits (
+    domain TEXT PRIMARY KEY,
+    imitates TEXT NOT NULL, how TEXT NOT NULL, risk TEXT NOT NULL,
+    first_cert TEXT, issuer TEXT,
+    found_at TEXT NOT NULL, last_checked TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'new',          -- new | blocked | benign
+    note TEXT NOT NULL DEFAULT ''
+);
 """
+# Columns added after the first release. Older databases get them on open.
+MIGRATIONS = {
+    "recipients": "ALTER TABLE cases ADD COLUMN recipients TEXT NOT NULL DEFAULT ''",
+    "tags": "ALTER TABLE cases ADD COLUMN tags TEXT NOT NULL DEFAULT ''",
+}
+
+
+def case_tags(iocs: IOCs, result: Result, report: ReportInfo | None) -> list[str]:
+    """Attack types in plain words, for the shift report's 'what hit us' view."""
+    flags = {f for u in iocs.urls for f in u.flags}
+    cats = {f.category for f in result.findings if f.points}
+    titles = " ".join(f.title.lower() for f in result.findings)
+    tags = []
+    if "BEC" in cats:
+        tags.append("Payment fraud (BEC)")
+    if flags & {"brand_impersonation", "anchor_lookalike", "embedded_domain"} or "imitates" in titles:
+        tags.append("Look-alike domain")
+    if "qr_code" in flags:
+        tags.append("QR code")
+    if "Attachment" in cats:
+        tags.append("Malicious attachment")
+    if "Impersonation" in cats:
+        tags.append("Impersonation")
+    if report and report.interacted:
+        tags.append("Reporter clicked")
+    if not tags and result.verdict != "LIKELY BENIGN":
+        tags.append("Credential phishing" if iocs.urls else "Other")
+    return tags
 
 
 @dataclass
@@ -113,6 +149,10 @@ class History:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with self._db() as db:
             db.executescript(SCHEMA)
+            have = {row["name"] for row in db.execute("PRAGMA table_info(cases)")}
+            for column, sql in MIGRATIONS.items():
+                if column not in have:
+                    db.execute(sql)
 
     @contextmanager
     def _db(self):
@@ -139,16 +179,19 @@ class History:
         ts = (now or datetime.now()).isoformat(timespec="seconds")
         key = email_key(parsed)
         reporter = (report.reporter if report else "") or ""
+        recipients = ", ".join(a.lower() for a in parsed.to if a)[:300]
+        tags = "|".join(case_tags(iocs, result, report))
         with self._db() as db:
             db.execute(
                 """INSERT INTO cases (email_key, reporter, first_seen, last_seen, file_name,
-                                      subject, sender, verdict, score)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                                      subject, sender, verdict, score, recipients, tags)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                    ON CONFLICT (email_key, reporter) DO UPDATE SET
                        last_seen = excluded.last_seen, verdict = excluded.verdict,
-                       score = excluded.score, file_name = excluded.file_name""",
+                       score = excluded.score, file_name = excluded.file_name,
+                       recipients = excluded.recipients, tags = excluded.tags""",
                 (key, reporter, ts, ts, file_name, parsed.subject[:300], parsed.from_addr,
-                 result.verdict, result.score),
+                 result.verdict, result.score, recipients, tags),
             )
             case_id = db.execute(
                 "SELECT id FROM cases WHERE email_key = ? AND reporter = ?", (key, reporter)
@@ -221,6 +264,71 @@ class History:
                    FROM anchors a JOIN cases c ON c.id = a.case_id
                    GROUP BY a.kind, a.value HAVING COUNT(DISTINCT a.case_id) >= 2
                    ORDER BY cases DESC, last_seen DESC LIMIT ?""", (limit,)).fetchall()
+
+    def between(self, since: datetime, until: datetime | None = None) -> list[sqlite3.Row]:
+        """Cases first seen in [since, until), newest first. ISO strings sort by time."""
+        until_s = (until or datetime.max.replace(microsecond=0)).isoformat(timespec="seconds")
+        with self._db() as db:
+            return db.execute(
+                "SELECT * FROM cases WHERE first_seen >= ? AND first_seen < ? "
+                "ORDER BY first_seen DESC",
+                (since.isoformat(timespec="seconds"), until_s)).fetchall()
+
+    def campaigns_between(self, since: datetime, limit: int = 10) -> list[sqlite3.Row]:
+        """Campaigns (infrastructure in 2+ cases) active since `since`."""
+        with self._db() as db:
+            return db.execute(
+                """SELECT a.kind, a.value, COUNT(DISTINCT a.case_id) AS cases,
+                          MAX(c.score) AS top_score, MAX(c.last_seen) AS last_seen
+                   FROM anchors a JOIN cases c ON c.id = a.case_id
+                   GROUP BY a.kind, a.value
+                   HAVING COUNT(DISTINCT a.case_id) >= 2 AND MAX(c.last_seen) >= ?
+                   ORDER BY cases DESC, last_seen DESC LIMIT ?""",
+                (since.isoformat(timespec="seconds"), limit)).fetchall()
+
+    # ------------------------------------------------------------ domain watch
+    def watch_upsert(self, hits, now: datetime | None = None) -> int:
+        """Save look-alike domains found in certificate logs. Returns how many are new.
+
+        A domain already on the list keeps its status (blocked / benign) and note:
+        checking again never undoes an analyst's decision.
+        """
+        ts = (now or datetime.now()).isoformat(timespec="seconds")
+        new = 0
+        with self._db() as db:
+            for h in hits:
+                existed = db.execute("SELECT 1 FROM watch_hits WHERE domain = ?",
+                                     (h.domain,)).fetchone()
+                db.execute(
+                    """INSERT INTO watch_hits (domain, imitates, how, risk, first_cert, issuer,
+                                               found_at, last_checked)
+                       VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                       ON CONFLICT (domain) DO UPDATE SET
+                           last_checked = excluded.last_checked, risk = excluded.risk,
+                           first_cert = MIN(COALESCE(watch_hits.first_cert, excluded.first_cert),
+                                            excluded.first_cert)""",
+                    (h.domain, h.imitates, h.how, h.risk, h.first_cert, h.issuer, ts, ts))
+                new += 0 if existed else 1
+        return new
+
+    def watch_list(self) -> list[sqlite3.Row]:
+        order = "CASE status WHEN 'new' THEN 0 WHEN 'blocked' THEN 1 ELSE 2 END"
+        risk = "CASE risk WHEN 'High' THEN 0 WHEN 'Medium' THEN 1 ELSE 2 END"
+        with self._db() as db:
+            return db.execute(f"SELECT * FROM watch_hits ORDER BY {order}, {risk}, "
+                              "first_cert DESC").fetchall()
+
+    def watch_set(self, domains: list[str], status: str | None = None,
+                  note: str | None = None) -> None:
+        if status is not None and status not in ("new", "blocked", "benign"):
+            raise ValueError("status must be new, blocked or benign")
+        with self._db() as db:
+            for d in domains:
+                if status is not None:
+                    db.execute("UPDATE watch_hits SET status = ? WHERE domain = ?", (status, d))
+                if note is not None:
+                    db.execute("UPDATE watch_hits SET note = ? WHERE domain = ?",
+                               (note[:500], d))
 
     def accuracy(self) -> tuple[int, int]:
         """(cases where the tool agreed with the analyst, cases the analyst decided)."""

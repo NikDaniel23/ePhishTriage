@@ -16,7 +16,7 @@ python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
-pytest -q                        # 90 tests should pass
+pytest -q                        # 77 tests should pass
 python cli.py samples/01_obvious_phish.eml
 streamlit run app.py             # opens the dashboard in your browser
 ```
@@ -305,21 +305,6 @@ Design decisions worth explaining:
 - **A provider's servers are never indicators.** A BEC email from Gmail arrives from Google's mail server. The tool will not offer `gmail.com` or that IP for blocking or hunting; it offers the sender *address*.
 - **Case history is stored locally** in `.cache/cases.db` (SQLite, git-ignored). It contains senders and subjects of reported mail: treat it as sensitive.
 - **The hunt queries were written from the documented Defender and Splunk table names but have not been run against a real tenant.** Test them in yours before relying on them.
-
-
-## 8c. Beyond triage: three tools for the rest of the shift
-
-The app has four pages, listed at the top of the left-hand menu.
-
-### Shift report (`triage/shift.py`, `app_pages/shift.py`)
-At the end of every shift someone writes the same summary by hand. Everything except the free-text notes is already in the case history, so the page builds it: reports per day by verdict, what is still open (malicious or suspicious with no analyst decision), attack types, most targeted staff, the senders behind the bad ones, tool-vs-analyst agreement and median time to a decision. The handover note is Markdown, made safe like the ticket, with your own notes added at the end.
-Older cases (from before this feature) have no recipients or attack types stored; new cases do.
-
-### Domain watch (`triage/watch.py`, `app_pages/watch.py`)
-Attackers need an HTTPS certificate for their fake login page, and every certificate is published in Certificate Transparency logs. Searching those logs (crt.sh, free) for our names finds look-alikes such as `c0rp.example` or `corp-payroll.example` days before the first email. The page reuses the BEC look-alike rules and adds a risk boost for words like *login*, *payroll*, *invoice*. Each hit can be marked blocked or benign, and that decision survives the next check. The demo uses `samples/mock_ct.json`, which also contains hostile names (HTML, a spreadsheet formula) to show they are rejected.
-
-### IOC workbench (`triage/workbench.py`, `app_pages/workbench.py`)
-Paste any text. It is refanged (`hxxp`, `[.]`, `(dot)`, `[@]`), then URLs, domains, IPs, addresses, hashes and CVE IDs are extracted. Our own domains, known-good sites, private IPs and webmail domains are separated out and never exported for blocking. URLs and addresses inherit the verdict of their domain. Exports: a validated block list (real values, for tools), a defanged list (for people) and a ticket table.
 
 ## 9. The three sample emails
 

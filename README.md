@@ -37,38 +37,127 @@ ePhishTriage does that groundwork and shows its evidence. **The analyst still de
 - Your decision: the analyst's final verdict is saved, and the agreement rate with the tool is shown
 - A Markdown ticket ready to paste, with every indicator defanged
 
-## Quick start
+## Installation
 
-Requires Python 3.10 or newer.
+ePhishTriage runs on your own computer. Nothing is uploaded anywhere: the dashboard is a local web page at `http://localhost:8501` that only your machine can open.
+
+### 1. Install the prerequisites
+
+You need **Python 3.10 or newer** and **Git**. Check whether you already have them:
 
 ```bash
-git clone https://github.com/<your-username>/ePhishTriage.git
-cd ePhishTriage
-python -m venv .venv
+python --version
+git --version
 ```
 
-Windows:
+If either command is not found, install it:
+
+| System | Python | Git |
+|---|---|---|
+| **Windows** | `winget install Python.Python.3.12`, or the installer from [python.org](https://www.python.org/downloads/) (tick **"Add python.exe to PATH"**) | `winget install Git.Git`, or [git-scm.com](https://git-scm.com/download/win) |
+| **macOS** | `brew install python` | `brew install git` (or run `git` once and accept the Xcode tools prompt) |
+| **Ubuntu / Debian** | `sudo apt install python3 python3-venv python3-pip` | `sudo apt install git` |
+
+Close and reopen your terminal after installing, so it finds the new commands. On macOS and Linux the command may be `python3` instead of `python`.
+
+### 2. Download the project
+
+```bash
+git clone https://github.com/NikDaniel23/ePhishTriage.git
+cd ePhishTriage
+```
+
+No Git? Use **Code > Download ZIP** on this page, unzip it, and open a terminal in the unzipped folder.
+
+### 3. Create a virtual environment and install the dependencies
+
+A virtual environment (`.venv`) keeps this project's packages separate from the rest of your system.
+
+**Windows (PowerShell):**
 
 ```powershell
+python -m venv .venv
+.venv\Scripts\python -m pip install --upgrade pip
 .venv\Scripts\python -m pip install -r requirements.txt
+```
+
+**macOS / Linux:**
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install --upgrade pip
+.venv/bin/python -m pip install -r requirements.txt
+```
+
+This downloads about 150 MB (Streamlit, OpenCV for QR codes, and the Outlook `.msg` reader) and takes a minute or two.
+
+## Run it on your own localhost
+
+**Windows:**
+
+```powershell
 .venv\Scripts\python -m streamlit run app.py
 ```
 
-macOS / Linux:
+**macOS / Linux:**
 
 ```bash
-.venv/bin/python -m pip install -r requirements.txt
 .venv/bin/python -m streamlit run app.py
 ```
 
-The dashboard opens at http://localhost:8501. It starts in offline mode, using the demo threat intel in `samples/mock_intel.json`, so it works without API keys or internet. Drop an email onto the page, or pick one of the samples in the sidebar.
+Your browser opens **http://localhost:8501** automatically. If it does not, open that address yourself.
 
-### Command line
+- **It is local only.** `.streamlit/config.toml` binds the server to `localhost`, so other computers on your network cannot open your dashboard or your case history.
+- **No API keys needed.** It starts in offline mode with the demo threat intel in `samples/mock_intel.json`, so everything works without keys or internet.
+- **Try it:** drag a `.eml` or `.msg` file onto the page, or pick one of the samples in the sidebar.
+- **To stop it:** press `Ctrl + C` in the terminal.
+- **To run it again later:** open a terminal in the project folder and run the same command. There is no need to reinstall.
+
+**Using a different port** (if 8501 is busy):
 
 ```bash
-python cli.py samples/01_obvious_phish.eml
-python cli.py suspicious.eml --live      # real VirusTotal / AbuseIPDB lookups
+python -m streamlit run app.py --server.port 8600
 ```
+
+Then open http://localhost:8600. Use the `.venv` Python path shown above, as in the other commands.
+
+### Command line (no dashboard)
+
+**Windows:**
+
+```powershell
+.venv\Scripts\python cli.py samples\01_obvious_phish.eml
+.venv\Scripts\python cli.py path\to\suspicious.eml --live      # real VirusTotal / AbuseIPDB lookups
+```
+
+**macOS / Linux:**
+
+```bash
+.venv/bin/python cli.py samples/01_obvious_phish.eml
+.venv/bin/python cli.py path/to/suspicious.eml --live
+```
+
+The report is printed as Markdown, ready to paste into a ticket.
+
+### Troubleshooting
+
+| Problem | Fix |
+|---|---|
+| `python` is not recognized (Windows) | Reinstall Python with **"Add python.exe to PATH"** ticked, then open a new terminal. Or use the `py` launcher: `py -m venv .venv` |
+| `streamlit` is not recognized | You ran `streamlit` directly. Use the full command above (`.venv\Scripts\python -m streamlit run app.py`), which does not depend on PATH |
+| `No module named ...` | The packages were installed into a different Python. Rerun step 3 using the `.venv` Python path |
+| `Port 8501 is already in use` | ePhishTriage (or another Streamlit app) is already running. Use that tab, stop it with `Ctrl + C`, or pick another port as shown above |
+| `running scripts is disabled on this system` (when using `run.ps1`) | Run once: `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` |
+| "Images were not checked for QR codes" | OpenCV did not install. Run `.venv\Scripts\python -m pip install opencv-python-headless` (or the macOS / Linux equivalent) |
+
+### Check that everything works
+
+```bash
+.venv/bin/python -m pytest -q          # macOS / Linux
+.venv\Scripts\python -m pytest -q      # Windows
+```
+
+All tests should pass.
 
 ## Live threat intel
 

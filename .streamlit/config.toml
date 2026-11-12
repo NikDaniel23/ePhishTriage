@@ -47,3 +47,11 @@ primaryColor = "#c3c6ff"
 
 [client]
 toolbarMode = "minimal"
+
+[server]
+# Only this computer can open the dashboard. Without this line Streamlit
+# listens on every network interface, so anyone on the same Wi-Fi could
+# open it and read the case history.
+address = "localhost"
+# Reported emails are small; 25 MB per file is plenty and limits memory use.
+maxUploadSize = 25

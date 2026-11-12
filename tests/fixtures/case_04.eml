@@ -1,0 +1,32 @@
+Return-Path: <bounce@oakspan.invalid>
+Received: from relay.oakspan.invalid (relay.oakspan.invalid [198.51.100.44])
+ by mx1.northline-studio.invalid with ESMTPS id NL-0004; Thu, 12 Nov 2026
+ 10:04:04 +0800
+Authentication-Results: mx1.northline-studio.invalid; spf=pass
+ smtp.mailfrom=oakspan.invalid; dkim=pass header.d=oakspan.invalid; dmarc=pass
+ header.from=oakspan.invalid
+From: Elena Lim <elena.lim@oakspan.invalid>
+To: Studio Operations <operations@northline-studio.invalid>
+Date: Thu, 12 Nov 2026 10:04:00 +0800
+Subject: Re: NL-417 | Friday payment run
+Message-ID: <case-04.20261112@oakspan.invalid>
+Reply-To: Oakspan Accounts <settlements@oakspan-finance.invalid>
+In-Reply-To: <nl-417.payment-run@northline-studio.invalid>
+References: <nl-417.payment-run@northline-studio.invalid>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+
+Hi Operations,
+
+Friday works for NL-417. Our receiving account changed during month-end.
+Please pause the old beneficiary and reply here for the replacement
+remittance details. Once your team updates the vendor record, please confirm
+that NL-417 is still on the Friday run.
+
+Thanks,
+Elena
+Oakspan Project Accounts
+
+On Wed, 11 Nov 2026, Studio Operations wrote:
+> Can you confirm NL-417 is ready for our Friday payment run?

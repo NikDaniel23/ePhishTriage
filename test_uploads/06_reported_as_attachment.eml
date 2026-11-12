@@ -1,0 +1,68 @@
+Received: from laptop-42.corp.example ([10.0.8.42]) by mx.corp.example; Mon, 9
+ Nov 2026 09:31:40 +0800
+Authentication-Results: mx.corp.example; spf=pass smtp.mailfrom=corp.example;
+ dkim=pass header.d=corp.example; dmarc=pass header.from=corp.example
+From: "Farid Hakim" <farid.hakim@corp.example>
+To: phishing-reports@corp.example
+Subject: FW: URGENT: Your NusaBank account will be suspended within 24 hours
+Date: Mon, 09 Nov 2026 09:31:40 +0800
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============6007780327918927834=="
+
+--===============6007780327918927834==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi SOC team,
+
+Got this one this morning. Sorry - I clicked the link before I noticed the ad=
+dress was weird, but I closed the page straight away. Saya tak masukkan apa-a=
+pa (I didn't type anything).
+
+Farid
+Finance
+
+--===============6007780327918927834==
+Content-Type: message/rfc822
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="URGENT NusaBank.eml"
+MIME-Version: 1.0
+
+UmVjZWl2ZWQ6IGZyb20gbXguY29ycC5leGFtcGxlIChteC5jb3JwLmV4YW1wbGUgWzEwLjAuMC41
+XSkgYnkKIG1haWxib3guY29ycC5leGFtcGxlOyBNb24sIDkgTm92IDIwMjYgMDk6MTQ6MDcgKzA4
+MDAKUmVjZWl2ZWQ6IGZyb20gbWFpbC5zZWN1cmUtdmVyaWZ5LnRvcCAodW5rbm93biBbMjAzLjAu
+MTEzLjQ1XSkgYnkKIG14LmNvcnAuZXhhbXBsZTsgTW9uLCA5IE5vdiAyMDI2IDA5OjE0OjA1ICsw
+ODAwCkF1dGhlbnRpY2F0aW9uLVJlc3VsdHM6IG14LmNvcnAuZXhhbXBsZTsgc3BmPWZhaWwKIHNt
+dHAubWFpbGZyb209c2VjdXJlLXZlcmlmeS50b3A7IGRraW09bm9uZTsgZG1hcmM9ZmFpbAogaGVh
+ZGVyLmZyb209c2VjdXJlLXZlcmlmeS50b3AKUmV0dXJuLVBhdGg6IDxib3VuY2VAc2VjdXJlLXZl
+cmlmeS50b3A+CkZyb206ICJOdXNhQmFuayBTZWN1cml0eSIgPGFsZXJ0QHNlY3VyZS12ZXJpZnku
+dG9wPgpSZXBseS1Ubzogc2FtcGxlX251c2FiYW5rX2hlbHBkZXNrQGdtYWlsLmNvbQpUbzogc3Rh
+ZmZAY29ycC5leGFtcGxlClN1YmplY3Q6IFVSR0VOVDogWW91ciBOdXNhQmFuayBhY2NvdW50IHdp
+bGwgYmUgc3VzcGVuZGVkIHdpdGhpbiAyNCBob3VycwpEYXRlOiBNb24sIDA5IE5vdiAyMDI2IDA5
+OjE0OjAyICswODAwCk1lc3NhZ2UtSUQ6IDw4ODQxQHNlY3VyZS12ZXJpZnkudG9wPgpNSU1FLVZl
+cnNpb246IDEuMApDb250ZW50LVR5cGU6IG11bHRpcGFydC9taXhlZDsgYm91bmRhcnk9Ij09PT09
+PT09PT09PT09PTI2NzI5MTU5MTQ1MzY5MjcxNDY9PSIKCi0tPT09PT09PT09PT09PT09MjY3Mjkx
+NTkxNDUzNjkyNzE0Nj09CkNvbnRlbnQtVHlwZTogbXVsdGlwYXJ0L2FsdGVybmF0aXZlOwogYm91
+bmRhcnk9Ij09PT09PT09PT09PT09PTQ3NDAwMzE2Mzk4MzIxODczODI9PSIKCi0tPT09PT09PT09
+PT09PT09NDc0MDAzMTYzOTgzMjE4NzM4Mj09CkNvbnRlbnQtVHlwZTogdGV4dC9wbGFpbjsgY2hh
+cnNldD0idXRmLTgiCkNvbnRlbnQtVHJhbnNmZXItRW5jb2Rpbmc6IHF1b3RlZC1wcmludGFibGUK
+CkRlYXIgY3VzdG9tZXIsCgpXZSBkZXRlY3RlZCB1bnVzdWFsIGFjdGl2aXR5LiBWZXJpZnkgeW91
+ciBhY2NvdW50IGltbWVkaWF0ZWx5IG9yIGl0IHdpbGwgYmUgcz0KdXNwZW5kZWQgd2l0aGluIDI0
+IGhvdXJzOgpodHRwOi8vbnVzYWJhbmstY29tLW15LnNlY3VyZS12ZXJpZnkudG9wL2xvZ2luP2lk
+PTNEODg0MQoKTnVzYUJhbmsgU2VjdXJpdHkKCi0tPT09PT09PT09PT09PT09NDc0MDAzMTYzOTgz
+MjE4NzM4Mj09CkNvbnRlbnQtVHlwZTogdGV4dC9odG1sOyBjaGFyc2V0PSJ1dGYtOCIKQ29udGVu
+dC1UcmFuc2Zlci1FbmNvZGluZzogcXVvdGVkLXByaW50YWJsZQpNSU1FLVZlcnNpb246IDEuMAoK
+PHA+RGVhciBjdXN0b21lciw8L3A+PHA+V2UgZGV0ZWN0ZWQgdW51c3VhbCBhY3Rpdml0eS4gVmVy
+aWZ5IHlvdXIgYWNjb3VudCBpbW09CmVkaWF0ZWx5IG9yIGl0IHdpbGwgYmUgc3VzcGVuZGVkIHdp
+dGhpbiAyNCBob3Vycy48L3A+PHA+PGEgaHJlZj0zRCJodHRwOi8vbnVzPQphYmFuay1jb20tbXku
+c2VjdXJlLXZlcmlmeS50b3AvbG9naW4/aWQ9M0Q4ODQxIj5odHRwczovL3d3dy5udXNhYmFuay5j
+b20ubXkvbD0Kb2dpbjwvYT48L3A+PHA+TnVzYUJhbmsgU2VjdXJpdHk8L3A+CgotLT09PT09PT09
+PT09PT09PTQ3NDAwMzE2Mzk4MzIxODczODI9PS0tCgotLT09PT09PT09PT09PT09PTI2NzI5MTU5
+MTQ1MzY5MjcxNDY9PQpDb250ZW50LVR5cGU6IHRleHQvaHRtbApDb250ZW50LVRyYW5zZmVyLUVu
+Y29kaW5nOiBiYXNlNjQKQ29udGVudC1EaXNwb3NpdGlvbjogYXR0YWNobWVudDsgZmlsZW5hbWU9
+IlN0YXRlbWVudC5wZGYuaHRtbCIKTUlNRS1WZXJzaW9uOiAxLjAKClBHaDBiV3crUENFdExTQm9Z
+WEp0YkdWemN5QndiR0ZqWldodmJHUmxjaUJtYjNJZ1lTQm1ZV3RsSUd4dloybHVJSEJoWjJVZ0xT
+MCsKUEM5b2RHMXNQZz09CgotLT09PT09PT09PT09PT09PTI2NzI5MTU5MTQ1MzY5MjcxNDY9PS0t
+Cg==
+
+--===============6007780327918927834==--

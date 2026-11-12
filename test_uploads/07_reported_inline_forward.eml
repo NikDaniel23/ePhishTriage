@@ -1,0 +1,32 @@
+Received: from laptop-42.corp.example ([10.0.8.42]) by mx.corp.example; Wed,
+ 11 Nov 2026 08:20:05 +0800
+Authentication-Results: mx.corp.example; spf=pass smtp.mailfrom=corp.example;
+ dkim=pass header.d=corp.example; dmarc=pass header.from=corp.example
+From: "Nurul Aisyah" <nurul.aisyah@corp.example>
+To: phishing-reports@corp.example
+Subject: Fwd: Notis Bayaran Balik Cukai 2026 - Tindakan Segera Diperlukan
+Date: Wed, 11 Nov 2026 08:20:05 +0800
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+Is this real? Looks dodgy to me.
+
+---------- Forwarded message ---------
+From: LHDN Malaysia - Unit Bayaran Balik <notis@lhdn-refund.example>
+Date: Wed, 11 Nov 2026 08:03:09 +0800
+Subject: Notis Bayaran Balik Cukai 2026 - Tindakan Segera Diperlukan
+To: <nurul.aisyah@corp.example>
+
+Tuan/Puan,
+
+Anda layak menerima bayaran balik cukai sebanyak RM1,284.50 bagi tahun taksir=
+an 2025. Sila sahkan akaun bank anda dalam masa 24 jam, jika tidak tuntutan a=
+nda akan digantung.
+
+Log masuk dengan ID pengguna dan kata laluan MyTax anda, kemudian masukkan no=
+mbor TAC yang dihantar ke telefon anda:
+https://mytax.hasil.gov.my@198.51.100.99/tuntutan/7730
+
+Unit Bayaran Balik
+Lembaga Hasil Dalam Negeri Malaysia

@@ -1,0 +1,359 @@
+/* ePhishTriage console: charcoal cards, grey sidebar nav, lavender actions.
+   Inter for anything you read, JetBrains Mono for labels, table heads,
+   chips and buttons. Colour means severity; lavender means "you can act". */
+
+:root {
+  --bg: #141414;
+  --card: #1b1b1b;
+  --card-2: #232323;
+  --line: #2e2e2e;
+  --line-soft: #262626;
+  --text: #ececec;
+  --muted: #a3a3a3;              /* 7:1 on --card */
+  --lav: #c3c6ff;
+  --lav-ink: #1d1f45;
+  --blue: #9fb8ff;
+  --red: #ff6b63;   --red-bg: rgba(255, 107, 99, 0.12);
+  --amber: #f2c14e; --amber-bg: rgba(242, 193, 78, 0.12);
+  --green: #5fd38a; --green-bg: rgba(95, 211, 138, 0.12);
+  --sans: "Inter", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --icon: "Material Symbols Rounded";
+}
+
+html, body { overflow-x: clip; }
+[data-testid="stMainBlockContainer"] { max-width: 1400px; padding-inline: 2rem; padding-top: 3rem; }
+[data-testid="stVerticalBlock"] { gap: 1rem; }
+:focus-visible { outline: 2px solid var(--lav); outline-offset: 2px; }
+.ms { font-family: var(--icon); font-weight: normal; font-style: normal; font-size: 22px; line-height: 1;
+      letter-spacing: normal; text-transform: none; white-space: nowrap; direction: ltr;
+      font-feature-settings: "liga"; -webkit-font-smoothing: antialiased; user-select: none; }
+
+/* ------------------------------------------------------------ sidebar nav */
+.nav { display: grid; gap: 2px; font-family: var(--sans); margin: 0 0 8px; }
+.nav a { display: flex; align-items: center; gap: 12px; padding: 9px 12px; border-radius: 8px; color: #d4d4d4; text-decoration: none; font-size: 15px; transition: background-color 120ms ease, color 120ms ease; }
+.nav a .ms { font-size: 21px; color: #bdbdbd; }
+
+.nav a.on { background: rgba(110, 160, 255, 0.16); color: #8fb4ff; }
+.nav a.on .ms { color: #8fb4ff; }
+.nav .badge { margin-left: auto; min-width: 26px; text-align: center; padding: 1px 8px; border-radius: 999px; font-size: 12px; font-family: var(--mono); background: #3a3a3a; color: #d4d4d4; }
+.nav .badge.hot { background: #5a2523; color: #ff8a80; }
+[data-testid="stSidebar"] h2 { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin: 8px 0 4px; }
+.side-rule { border: 0; border-top: 1px solid #3d3d3d; margin: 6px 0 2px; }
+
+/* ------------------------------------------------------------ page header */
+.top { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-family: var(--sans); }
+.top h1 { font-size: 26px; font-weight: 600; margin: 0; color: var(--text); letter-spacing: -0.01em; }
+.top p { margin: 4px 0 0; color: var(--muted); }
+.top p code { font-family: var(--mono); font-size: 13px; color: var(--text); background: none; padding: 0; }
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 8px; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; border: 1px solid var(--line); color: var(--text); background: var(--card); }
+.pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); }
+.pill.live .dot { background: var(--green); }
+
+/* ------------------------------------------------------------ stat cards */
+.stats { margin-top: 20px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; font-family: var(--sans); }
+.stat { margin: 0; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; }
+.stat dt { font-family: var(--mono); font-size: 13px; color: #cfcfcf; }
+.stat dd { margin: 6px 0 0; line-height: 1.15; font-size: 26px; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+.stat dd small { font-size: 14px; color: var(--muted); font-weight: 500; }
+.stat .ms { font-size: 30px; color: #e0e0e0; }
+.stat.red dd, .stat.red .ms { color: var(--red); }
+.stat.amber dd, .stat.amber .ms { color: var(--amber); }
+.stat.green dd, .stat.green .ms { color: var(--green); }
+.stat.lav dd { color: var(--lav); }
+
+/* ------------------------------------------------------------ sections */
+.sec { font-family: var(--sans); scroll-margin-top: 4rem; }
+.sec-h { display: flex; justify-content: space-between; align-items: end; gap: 12px; margin: 18px 0 14px; }
+.sec-h h2 { font-size: 24px; font-weight: 600; margin: 0; color: var(--text); letter-spacing: -0.01em; }
+.sec-h p { margin: 2px 0 0; color: var(--muted); font-size: 14px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; font-family: var(--sans); color: var(--text); }
+.grid2 { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 14px; }
+.grid4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+/* Streamlit gives every definition list 28px of left padding. Override it with a
+   selector that outranks Streamlit's, and set the cards' own padding here
+   so left and right always match. */
+.stApp dl.kv { padding: 0; margin: 0; }
+.stApp dl.stat { padding: 18px 20px; }
+.stApp .kv dd, .stApp .stat dd { padding-left: 0; margin-left: 0; }
+.card dd { margin-left: 0; }
+
+/* verdict */
+.verdict { display: grid; gap: 14px; }
+.vtop { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.vbadge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 8px; font-family: var(--mono); font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--v); background: var(--v-bg); border: 1px solid var(--v); }
+.vbadge .ms { font-size: 18px; }
+.vscore { font-size: 34px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.vscore small { font-size: 15px; color: var(--muted); font-weight: 500; }
+[data-v="MALICIOUS"] { --v: var(--red); --v-bg: var(--red-bg); }
+[data-v="SUSPICIOUS"] { --v: var(--amber); --v-bg: var(--amber-bg); }
+[data-v="LIKELY BENIGN"] { --v: var(--green); --v-bg: var(--green-bg); }
+.bar { position: relative; height: 10px; border-radius: 999px; background: var(--card-2); overflow: hidden; }
+.bar .fill { position: absolute; inset: 0; border-radius: 999px; background: var(--v); }
+.bar .tick { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--bg); }
+.scale { display: grid; grid-template-columns: 25fr 35fr 40fr; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.scale span[aria-current="true"] { color: var(--v); }
+.action { border-top: 1px solid var(--line); padding-top: 14px; }
+.label { display: block; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 4px; }
+.action p { margin: 0; line-height: 1.55; }
+.cats { display: grid; gap: 10px; margin-top: 4px; }
+.cat { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr) 3rem; gap: 10px; align-items: center; font-size: 14px; }
+.cat > span:first-child { color: #cfcfcf; }
+.cat .track { height: 8px; border-radius: 999px; background: var(--card-2); overflow: hidden; }
+.cat .fill { display: block; height: 100%; border-radius: 999px; background: var(--lav); }
+.cat .n { text-align: right; font-family: var(--mono); font-size: 13px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+
+/* authentication cards (integration-card style) */
+.auth { display: grid; gap: 12px; align-content: start; }
+.auth-top { display: flex; justify-content: space-between; align-items: start; }
+.tile { width: 46px; height: 46px; border-radius: 8px; display: grid; place-items: center; background: var(--t-bg); border: 1px solid var(--t-line); color: var(--t); }
+.tile .ms { font-size: 24px; }
+.auth h3 { margin: 0; font-size: 19px; font-weight: 600; color: var(--text); }
+.auth .desc { margin: 2px 0 0; color: var(--muted); font-size: 13px; line-height: 1.45; min-height: 2.9em; }
+.auth-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; border-top: 1px solid var(--line); padding-top: 10px; font-family: var(--mono); font-size: 12px; }
+.auth-foot .st { display: inline-flex; align-items: center; gap: 6px; color: var(--t); }
+.auth-foot .st::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.auth-foot .detail { color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.ok   { --t: var(--green); --t-bg: rgba(95, 211, 138, 0.10); --t-line: rgba(95, 211, 138, 0.35); }
+.bad  { --t: var(--red);   --t-bg: rgba(255, 107, 99, 0.10); --t-line: rgba(255, 107, 99, 0.35); }
+.warn { --t: var(--amber); --t-bg: rgba(242, 193, 78, 0.10); --t-line: rgba(242, 193, 78, 0.35); }
+.none { --t: var(--muted); --t-bg: #222; --t-line: #3a3a3a; }
+
+/* field list */
+.kv { display: grid; grid-template-columns: 9rem minmax(0, 1fr); margin: 0; }
+.kv dt { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 9px 0; border-bottom: 1px solid var(--line-soft); }
+.kv dd { margin: 0; padding: 8px 0; border-bottom: 1px solid var(--line-soft); overflow-wrap: anywhere; }
+.kv > :nth-last-child(-n+2) { border-bottom: 0; }
+.ioc { font-family: var(--mono); font-size: 13px; color: var(--blue); }
+
+/* chips (the ADMIN / WRITE badges) */
+.chip { display: inline-block; padding: 2px 8px; border-radius: 4px; border: 1px solid #4a4a4a; background: #232323; font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: #e2e2e2; white-space: nowrap; }
+.chip.flag { border-color: rgba(242, 193, 78, 0.45); color: var(--amber); background: var(--amber-bg); }
+
+/* tables */
+.tbl-card { padding: 4px 0 4px; overflow-x: auto; }
+.tbl { width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: 14px; }
+.tbl th { text-align: left; font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #cfcfcf; padding: 14px 16px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.tbl td { padding: 14px 16px; border-bottom: 1px solid var(--line-soft); vertical-align: middle; overflow-wrap: anywhere; }
+.tbl tr:last-child td { border-bottom: 0; }
+
+.tbl .nowrap { white-space: nowrap; }
+.tbl .num { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.who { display: flex; align-items: center; gap: 12px; }
+.avatar { flex: none; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--t); background: var(--t-bg); border: 1px solid var(--t-line); }
+.who b { display: block; font-weight: 500; color: var(--text); }
+.who small { display: block; color: var(--muted); font-size: 13px; margin-top: 1px; }
+.sev { display: inline-flex; align-items: center; gap: 7px; color: var(--t); white-space: nowrap; }
+.sev::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.empty { color: var(--muted); padding: 14px 16px; margin: 0; }
+
+/* report alerts */
+.alert { display: flex; gap: 12px; align-items: start; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--t-line); background: var(--t-bg); font-family: var(--sans); }
+.alert .ms { color: var(--t); font-size: 22px; }
+.alert b { display: block; color: var(--t); font-weight: 600; }
+.alert span { color: var(--text); font-size: 14px; }
+
+/* native-widget cards (intel dataframe, ticket) */
+[class*="st-key-card-"] { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; gap: 12px; }
+.st-key-card-ticket [data-testid="stCode"] pre { max-height: 24rem; }
+/* the code block brings its own padding: don't double it */
+.st-key-card-ticket { padding: 6px; }
+.st-key-card-ticket [data-testid="stCode"] pre { border-radius: 8px; }
+/* lavender primary button with mono caps label, like "+ ADD INTEGRATION" */
+.st-key-export button { background: var(--lav); color: var(--lav-ink); border: 0; font-family: var(--mono); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+.st-key-export button p { font-family: var(--mono); font-weight: 600; color: var(--lav-ink); }
+
+
+@media (max-width: 75rem) {
+  .grid4, .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 48rem) {
+  [data-testid="stMainBlockContainer"] { padding-inline: 1rem; }
+  .grid2, .grid4 { grid-template-columns: minmax(0, 1fr); }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .stat { padding: 12px 14px; } .stat dd { font-size: 22px; } .stat .ms { display: none; }
+  .kv { grid-template-columns: minmax(0, 1fr); }
+  .kv dt { border-bottom: 0; padding-bottom: 0; }
+  .tbl th, .tbl td { padding: 10px 10px; }
+}
+
+/* =============================================================== motion
+   Rules (from Emil Kowalski's design-engineering skill):
+   - every animation has a purpose; decoration seen many times a day is cut
+   - animate transform and opacity only, name properties, never "all"
+   - ease-out for entering, ease for hover/colour, UI motion under 300ms
+   - never start from scale(0); hover only on real mouse pointers
+   - reduced motion keeps fades, drops movement
+   An analyst loads tens of emails a day, so motion here is short and only
+   on what changes when a new email loads: the numbers at the top. */
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+@keyframes rise { from { opacity: 0; transform: translateY(6px); } }
+@keyframes grow { from { transform: scaleX(0); } }
+@keyframes fade { from { opacity: 0; } }
+
+/* 1. New email loaded: the top of the page settles in, left to right.
+      Purpose: shows the state changed. Lower sections stay still. */
+.hero { animation: rise 260ms var(--ease-out) both; }
+.alert { animation: rise 240ms var(--ease-out) both; }
+
+/* 2. Score bars grow from zero. Purpose: explains where the score sits on
+      the benign / suspicious / malicious scale. Transform only. */
+.bar .fill, .cat .fill { transform-origin: left center; transform: scaleX(var(--s, 1)); }
+.bar .fill { animation: grow 450ms var(--ease-out) 160ms both; }
+.cat .fill { animation: grow 360ms var(--ease-out) both; }
+.cat:nth-child(2) .fill { animation-delay: 30ms; } .cat:nth-child(3) .fill { animation-delay: 60ms; }
+.cat:nth-child(4) .fill { animation-delay: 90ms; } .cat:nth-child(5) .fill { animation-delay: 120ms; }
+.cat:nth-child(n+6) .fill { animation-delay: 150ms; }
+
+/* 3. Jumping to a section from the nav: smooth scroll for orientation, and
+      the title flashes lavender so the eye lands on it. Colour only. */
+html, [data-testid="stMain"] { scroll-behavior: smooth; }
+@keyframes land { from { color: var(--lav); } }
+.sec:target h2 { animation: land 900ms ease both; }
+
+/* 4. Press feedback on the one primary button. */
+.st-key-export button { transition: transform 160ms var(--ease-out), background-color 150ms ease; }
+.st-key-export button:active { transform: scale(0.97); }
+
+/* 5. The rare, serious alert (reporter clicked) gets one attention ring on
+      its icon. Rare event, so a little more motion is acceptable. */
+@keyframes ring { 0% { box-shadow: 0 0 0 0 rgba(255, 107, 99, 0.45); } 100% { box-shadow: 0 0 0 10px rgba(255, 107, 99, 0); } }
+.alert.bad .ms { border-radius: 50%; animation: ring 900ms var(--ease-out) 300ms 2; }
+
+/* Hover: mouse pointers only, so a tap on a phone never sticks. */
+@media (hover: hover) and (pointer: fine) {
+  .nav a:hover { background: #343434; color: #fff; }
+  .tbl tbody tr { transition: background-color 120ms ease; }
+  .tbl tbody tr:hover td { background: rgba(255, 255, 255, 0.025); }
+  .st-key-export button:hover { background: #d6d8ff; color: var(--lav-ink); }
+}
+
+/* Reduced motion: fewer and gentler, not none. Keep fades, drop movement. */
+@media (prefers-reduced-motion: reduce) {
+  .hero, .alert { animation-name: fade; }
+  .why li, .dial { animation: none; }
+  .bar .fill, .cat .fill { animation: none; }
+  .alert.bad .ms { animation: none; }
+  .st-key-export button:active { transform: none; }
+  html, [data-testid="stMain"] { scroll-behavior: auto; }
+}
+
+/* =============================================================== verdict hero
+   The verdict owns the first screen. One tinted panel: the word set huge in
+   the verdict colour, the score as a dial, the top three reasons, the scale,
+   and what to do. Colour appears nowhere else at this size. */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px 40px; align-items: center;
+  margin-top: 20px; padding: 32px 36px; border-radius: 16px; font-family: var(--sans); color: var(--text);
+  border: 1px solid color-mix(in srgb, var(--v) 45%, var(--line));
+  background: radial-gradient(120% 140% at 0% 0%, var(--v-bg), transparent 62%), var(--card);
+  scroll-margin-top: 4rem; }
+.hero .label { margin-bottom: 6px; }
+.hero-word { display: flex; align-items: center; gap: 16px; margin: 0; padding: 0;
+  font-size: clamp(3rem, 2rem + 4.2vw, 5.5rem); font-weight: 700; line-height: 1; letter-spacing: -0.03em;
+  color: var(--v); overflow-wrap: anywhere; }
+.hero-word .ms { font-size: 0.72em; }
+.hero-sub { margin: 12px 0 0; font-size: 18px; color: var(--text); }
+.stApp .why { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.stApp .why li { margin: 0; display: flex; align-items: baseline; gap: 12px; font-size: 16px;
+  animation: rise 240ms var(--ease-out) both; }
+.why li:nth-child(1) { animation-delay: 120ms; }
+.why li:nth-child(2) { animation-delay: 170ms; }
+.why li:nth-child(3) { animation-delay: 220ms; }
+.why .pts { flex: none; min-width: 3.2em; text-align: center; padding: 1px 8px; border-radius: 6px;
+  font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--v); background: var(--v-bg);
+  border: 1px solid color-mix(in srgb, var(--v) 40%, transparent); }
+.more { display: inline-block; margin-top: 8px; font-size: 14px; color: var(--muted);
+  text-decoration: underline; text-underline-offset: 3px; }
+
+/* score dial: a ring filled to the score */
+.hero-dial { display: grid; justify-items: center; }
+.dial { position: relative; width: 190px; height: 190px; border-radius: 50%; display: grid;
+  place-items: center; animation: fade 400ms ease 120ms both; }
+.dial::before { content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background: conic-gradient(var(--v) calc(var(--s) * 1turn), var(--card-2) 0);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 16px), #000 calc(100% - 15px));
+          mask: radial-gradient(farthest-side, transparent calc(100% - 16px), #000 calc(100% - 15px)); }
+.dial-num { font-size: 60px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; color: var(--text); }
+.dial-num small { display: block; text-align: center; margin-top: 4px; font-family: var(--mono);
+  font-size: 14px; font-weight: 500; color: var(--muted); }
+
+.hero-scale { grid-column: 1 / -1; display: grid; gap: 8px; }
+.hero .bar { height: 12px; }
+.hero-action { grid-column: 1 / -1; padding-top: 20px;
+  border-top: 1px solid color-mix(in srgb, var(--v) 25%, var(--line)); }
+.hero-action p { margin: 0; font-size: 16px; line-height: 1.6; max-width: 90ch; }
+
+@media (hover: hover) and (pointer: fine) { .more:hover { color: var(--text); } }
+@media (max-width: 60rem) {
+  .hero { grid-template-columns: minmax(0, 1fr); padding: 24px 20px; gap: 22px; }
+  .hero-dial { justify-items: start; }
+  .dial { width: 140px; height: 140px; }
+  .dial-num { font-size: 44px; }
+}
+
+/* ---------------------------------------------------------------- workflow
+   Seen-before banner, queue, hunt query headings. */
+.info { --t: var(--lav); --t-bg: rgba(195, 198, 255, 0.08); --t-line: rgba(195, 198, 255, 0.35); }
+.stApp .rel { margin: 6px 0 0; padding: 0 0 0 18px; color: var(--text); font-size: 14px; }
+.stApp .rel li { margin: 2px 0; }
+.hunt { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  font-family: var(--sans); color: var(--text); margin-top: 6px; }
+.hunt b { font-weight: 600; }
+
+/* ---------------------------------------------------------------- welcome */
+.welcome { font-family: var(--sans); margin: 6vh 0 22px; animation: rise 260ms var(--ease-out) both; }
+.welcome h1 { margin: 0; padding: 0; font-size: clamp(2.2rem, 1.4rem + 3vw, 3.6rem); font-weight: 700;
+  line-height: 1.05; letter-spacing: -0.03em; color: var(--text); max-width: 18ch; }
+.welcome p { margin: 16px 0 0; font-size: 18px; line-height: 1.55; color: var(--muted); max-width: 58ch; }
+.st-key-welcome-drop [data-testid="stFileUploaderDropzone"] { min-height: 200px; border: 1.5px dashed #4a4a4a;
+  border-radius: 16px; background: var(--card); transition: border-color 150ms ease, background-color 150ms ease; }
+.st-key-welcome-drop [data-testid="stWidgetLabel"] { display: none; }
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 6px; }
+.tip { display: flex; gap: 14px; align-items: flex-start; }
+.tip .ms { color: var(--lav); font-size: 26px; }
+.tip b { display: block; font-weight: 600; color: var(--text); }
+.tip span { display: block; margin-top: 2px; color: var(--muted); font-size: 14px; line-height: 1.5; }
+.welcome-hint { font-family: var(--sans); color: var(--muted); font-size: 14px; margin: 16px 0 0; }
+@media (hover: hover) and (pointer: fine) {
+  .st-key-welcome-drop [data-testid="stFileUploaderDropzone"]:hover { border-color: var(--lav); }
+}
+@media (max-width: 48rem) { .grid3 { grid-template-columns: minmax(0, 1fr); } }
+@media (prefers-reduced-motion: reduce) { .welcome { animation-name: fade; } }
+/* the welcome drop zone: centred, with a clear prompt above the button */
+.st-key-welcome-drop [data-testid="stFileUploaderDropzone"] { display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 12px; padding: 28px 20px; text-align: center; }
+.st-key-welcome-drop [data-testid="stFileUploaderDropzone"]::before { content: "Drag and drop .eml or .msg files here";
+  font-family: var(--sans); font-size: 18px; font-weight: 600; color: var(--text); }
+.st-key-welcome-drop [data-testid="stFileUploaderDropzoneInstructions"] { margin: 0; justify-content: center; }
+
+/* queue: every verdict visible, the open email highlighted */
+.queue { overflow-x: auto; max-height: 19rem; overflow-y: auto; }
+.queue .tbl td, .queue .tbl th { padding: 9px 14px; }
+.queue .tbl tr.cur td { background: rgba(195, 198, 255, 0.10); }
+.queue .tbl tr.cur td:first-child { box-shadow: inset 3px 0 0 var(--lav); font-weight: 700; color: var(--lav); }
+
+/* queue actions: a wrapping row of quiet buttons under the table */
+.st-key-queue-actions { gap: 8px; flex-wrap: wrap; align-items: center; }
+.st-key-queue-actions button { font-size: 13px; }
+
+/* menu before an email is open: same items, visibly not available yet */
+.nav .off { display: flex; align-items: center; gap: 12px; padding: 9px 12px; border-radius: 8px;
+  color: #8f8f8f; font-size: 15px; cursor: default; user-select: none; }
+.nav .off .ms { font-size: 21px; color: #7a7a7a; }
+.nav-hint { margin: 2px 12px 8px; font-family: var(--sans); font-size: 12px; color: #9a9a9a; }
+
+/* Text stays selectable and copyable, but the pointer stays an arrow over it.
+   The I-beam only appears where you can actually type. */
+.stApp { cursor: default; }
+.stApp input, .stApp textarea, .stApp [contenteditable="true"] { cursor: text; }
+.stApp a[href], .stApp button, .stApp [role="button"], .stApp [role="tab"],
+.stApp label:has(input[type="checkbox"]), .stApp [data-baseweb="select"] { cursor: pointer; }
+.stApp button:disabled { cursor: not-allowed; }
+
+/* the ePhishTriage wordmark in the sidebar header */
+[data-testid="stSidebarHeader"] img, [data-testid="stHeaderLogo"] { height: 1.6rem; max-width: 12rem; object-fit: contain; }
+.welcome { margin-top: 4vh; }

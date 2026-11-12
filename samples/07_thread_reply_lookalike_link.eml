@@ -1,0 +1,65 @@
+Return-Path: <bounces@stonebridge-design.invalid>
+Received: from relay.stonebridge-design.invalid
+ (relay.stonebridge-design.invalid [198.51.100.27]) by
+ mx1.northline-studio.invalid with ESMTPS id NL-7C429 for
+ <project.admin@northline-studio.invalid>; Thu, 12 Nov 2026 09:18:42 +0800
+Authentication-Results: mx1.northline-studio.invalid; spf=pass
+ smtp.mailfrom=stonebridge-design.invalid; dkim=pass
+ header.d=stonebridge-design.invalid; dmarc=pass
+ header.from=stonebridge-design.invalid
+From: Maya Tan <maya.tan@stonebridge-design.invalid>
+To: Project Admin <project.admin@northline-studio.invalid>
+Reply-To: Maya Tan <maya.tan@stonebridge-design.invalid>
+Date: Thu, 12 Nov 2026 09:18:38 +0800
+Subject: Re: Riverside Pavilion | Rev C coordination set
+Message-ID: <rev-c.20261112.091838@stonebridge-design.invalid>
+In-Reply-To: <riverside.rev-c.request@northline-studio.invalid>
+References: <riverside.rev-c.request@northline-studio.invalid>
+X-Training-Simulation: fictional headers and reserved destinations
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============7245241718719993072=="
+
+--===============7245241718719993072==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi,
+
+I've uploaded the Rev C coordination set to the usual project folder.
+The drawing register is inside the package. The roof drainage notes are
+the only changes since yesterday's issue.
+
+Riverside Pavilion - Rev C
+https://stonebridge-files.invalid/projects/riverside/rev-c
+
+Thanks,
+Maya
+Stonebridge Design | Project Coordination
+
+On Wed, 11 Nov 2026 at 16:42, Project Admin wrote:
+> Hi Maya, please share Rev C before the Thursday coordination call.
+> Could you include the drawing register in the same folder?
+
+--===============7245241718719993072==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<!doctype html>
+<html lang=3D"en"><body style=3D"font:15px Arial,sans-serif;color:#222">
+<p>Hi,</p>
+<p>I've uploaded the Rev C coordination set to the usual project folder.
+The drawing register is inside the package. The roof drainage notes are
+the only changes since yesterday's issue.</p>
+<p><strong>Riverside Pavilion &ndash; Rev C</strong><br>
+<a href=3D"https://stonebrldge-files.invalid/projects/riverside/rev-c">https:=
+//stonebridge-files.invalid/projects/riverside/rev-c</a></p>
+<p>Thanks,<br>Maya<br>Stonebridge Design | Project Coordination</p>
+<div style=3D"border-left:2px solid #ccc;padding-left:12px;color:#555">
+<p>On Wed, 11 Nov 2026 at 16:42, Project Admin wrote:</p>
+<p>Hi Maya, please share Rev C before the Thursday coordination call.<br>
+Could you include the drawing register in the same folder?</p>
+</div></body></html>
+
+--===============7245241718719993072==--

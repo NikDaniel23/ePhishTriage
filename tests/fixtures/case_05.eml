@@ -1,0 +1,41 @@
+Return-Path: <bounce@meetingdesk.invalid>
+Received: from relay.meetingdesk.invalid (relay.meetingdesk.invalid
+ [198.51.100.55]) by mx1.northline-studio.invalid with ESMTPS id NL-0005; Thu,
+ 12 Nov 2026 10:05:04 +0800
+Authentication-Results: mx1.northline-studio.invalid; spf=pass
+ smtp.mailfrom=meetingdesk.invalid; dkim=pass header.d=meetingdesk.invalid;
+ dmarc=pass header.from=meetingdesk.invalid
+From: Room Booking <rooms@meetingdesk.invalid>
+To: Studio Operations <operations@northline-studio.invalid>
+Date: Thu, 12 Nov 2026 10:05:00 +0800
+Subject: Riverside coordination | room reservation
+Message-ID: <case-05.20261112@meetingdesk.invalid>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============7012202845926664011=="
+
+--===============7012202845926664011==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+The room is reserved for the Riverside coordination call.
+
+Meeting details:
+https://meet.meetingdesk.invalid/riverside-coordination
+
+The calendar invite is attached for your schedule.
+
+--===============7012202845926664011==
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="riverside-coordination.ics"
+Content-Type: text/calendar; charset="us-ascii"; method="PUBLISH"
+MIME-Version: 1.0
+
+QkVHSU46VkNBTEVOREFSDQpWRVJTSU9OOjIuMA0KUFJPRElEOi0vL01lZXRpbmdEZXNrIExhYi8v
+RU4NCk1FVEhPRDpQVUJMSVNIDQpCRUdJTjpWRVZFTlQNClVJRDpyaXZlcnNpZGUtMjAyNjExMTJA
+bWVldGluZ2Rlc2suaW52YWxpZA0KRFRTVEFNUDoyMDI2MTExMlQwMjA1MDBaDQpEVFNUQVJUOjIw
+MjYxMTEyVDAzMDAwMFoNCkRURU5EOjIwMjYxMTEyVDAzMzAwMFoNClNVTU1BUlk6Uml2ZXJzaWRl
+IGNvb3JkaW5hdGlvbg0KREVTQ1JJUFRJT046T3BlbiB0aGUgbWVldGluZyBsb2JieSB1c2luZyB0
+aGUgZXZlbnQgbGluay4NClVSTDpodHRwczovL21lZXRpbmdkZXNrLmludmFsaWQubG9iYnktY2hl
+Y2suaW52YWxpZC9yaXZlcnNpZGUNCkVORDpWRVZFTlQNCkVORDpWQ0FMRU5EQVINCg==
+
+--===============7012202845926664011==--

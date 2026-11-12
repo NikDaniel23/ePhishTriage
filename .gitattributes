@@ -1,0 +1,5 @@
+# Emails are test data: keep them byte-for-byte (no line-ending conversion),
+# so signatures, encodings and attachment hashes stay exactly as written.
+*.eml -text
+*.msg binary
+*.png binary

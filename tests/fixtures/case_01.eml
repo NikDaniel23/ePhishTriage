@@ -1,0 +1,46 @@
+Return-Path: <bounce@workspace-sync.invalid>
+Received: from relay.workspace-sync.invalid (relay.workspace-sync.invalid
+ [198.51.100.11]) by mx1.northline-studio.invalid with ESMTPS id NL-0001; Thu,
+ 12 Nov 2026 10:01:04 +0800
+Authentication-Results: mx1.northline-studio.invalid; spf=pass
+ smtp.mailfrom=workspace-sync.invalid; dkim=pass
+ header.d=workspace-sync.invalid; dmarc=fail
+ header.from=northline-studio.invalid
+From: Northline IT <service.desk@northline-studio.invalid>
+To: Studio Operations <operations@northline-studio.invalid>
+Date: Thu, 12 Nov 2026 10:01:00 +0800
+Subject: Your device enrollment review is ready
+Message-ID: <case-01.20261112@northline-studio.invalid>
+Authentication-Results: mx1.northline-studio.invalid; spf=pass
+ smtp.mailfrom=northline-studio.invalid; dkim=pass
+ header.d=northline-studio.invalid; dmarc=pass
+ header.from=northline-studio.invalid
+Received: from service.northline-studio.invalid by
+ relay.workspace-sync.invalid; Thu, 12 Nov 2026 10:00:54 +0800
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============8584535861653455030=="
+
+--===============8584535861653455030==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Operations,
+
+The asset register now shows the workstations due for enrollment review.
+Use the device portal to confirm your assigned workstation before Friday.
+
+Northline Service Desk
+
+--===============8584535861653455030==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+
+<html><body><p>Hi Operations,</p>
+<p>The asset register now shows the workstations due for enrollment review.
+Use the device portal to confirm your assigned workstation before Friday.</p>
+<p><a href="https://northline-studio.invalid.device-review.invalid/enroll">
+Device portal</a></p><p>Northline Service Desk</p></body></html>
+
+--===============8584535861653455030==--

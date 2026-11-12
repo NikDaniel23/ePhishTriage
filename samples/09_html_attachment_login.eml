@@ -1,0 +1,41 @@
+Received: from mta.voice-notify.example (mta.voice-notify.example
+ [198.51.100.151]) by mx.corp.example; Fri, 13 Nov 2026 11:12:40 +0800
+Authentication-Results: mx.corp.example; spf=pass
+ smtp.mailfrom=voice-notify.example; dkim=pass header.d=voice-notify.example;
+ dmarc=none
+Return-Path: <vm@voice-notify.example>
+From: "Voicemail Service" <vm@voice-notify.example>
+To: staff@corp.example
+Subject: New voicemail (0:42) from +60 3-5550 0142
+Date: Fri, 13 Nov 2026 11:12:33 +0800
+Message-ID: <vm-0412@voice-notify.example>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============4635866151296078958=="
+
+--===============4635866151296078958==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+You received a new voicemail.
+
+Caller: +60 3-5550 0142
+Length: 0:42
+
+Open the attached file to listen.
+
+--===============4635866151296078958==
+Content-Type: text/html
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="Voicemail_0412.html"
+MIME-Version: 1.0
+
+PCFkb2N0eXBlIGh0bWw+PGh0bWw+PGhlYWQ+PHRpdGxlPlZvaWNlbWFpbDwvdGl0bGU+PC9oZWFk
+Pjxib2R5PjxoMz5TaWduIGluIHRvIHBsYXkgeW91ciB2b2ljZW1haWw8L2gzPjxmb3JtIG1ldGhv
+ZD0icG9zdCIgYWN0aW9uPSJodHRwczovL2NvbGxlY3Qudm9pY2Utbm90aWZ5LWxvZ2luLmV4YW1w
+bGUvc2F2ZSI+PGlucHV0IHR5cGU9ImVtYWlsIiBuYW1lPSJ1c2VyIiB2YWx1ZT0ic3RhZmZAY29y
+cC5leGFtcGxlIj48aW5wdXQgdHlwZT0icGFzc3dvcmQiIG5hbWU9InBhc3MiIHBsYWNlaG9sZGVy
+PSJQYXNzd29yZCI+PGJ1dHRvbiB0eXBlPSJzdWJtaXQiPlBsYXkgbWVzc2FnZTwvYnV0dG9uPjwv
+Zm9ybT48c2NyaXB0PnZhciB0ID0gYXRvYignVkhKaGFXNXBibWNnYzJGdGNHeGwnKTsgZG9jdW1l
+bnQudGl0bGUgPSB0Ozwvc2NyaXB0PjwvYm9keT48L2h0bWw+
+
+--===============4635866151296078958==--

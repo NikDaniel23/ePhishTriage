@@ -1,0 +1,35 @@
+{
+  "_comment": "Who 'we' are. BEC detection needs this: it flags look-alikes of OUR domains, outsiders using OUR executives' names, and look-alikes of OUR suppliers. Edit for your organisation. The values below are fictional.",
+  "org_domains": [
+    "corp.example"
+  ],
+  "executives": [
+    {
+      "name": "Rahman Ismail",
+      "title": "Chief Executive Officer"
+    },
+    {
+      "name": "Tan Mei Ling",
+      "title": "Chief Financial Officer"
+    },
+    {
+      "name": "Arjun Pillai",
+      "title": "Finance Director"
+    }
+  ],
+  "suppliers": [
+    {
+      "name": "Stonebridge Design",
+      "domains": [
+        "stonebridge-design.invalid",
+        "stonebridge-files.invalid"
+      ]
+    },
+    {
+      "name": "Example Supplies",
+      "domains": [
+        "example-supplies.example"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+Received: from mx.corp.example (mx.corp.example [10.0.0.5]) by
+ mailbox.corp.example; Thu, 12 Nov 2026 16:40:22 +0800
+Received: from relay.p0slaju-track.example (unknown [192.0.2.140]) by
+ mx.corp.example; Thu, 12 Nov 2026 16:40:19 +0800
+Authentication-Results: mx.corp.example; spf=pass
+ smtp.mailfrom=p0slaju-track.example; dkim=pass
+ header.d=p0slaju-track.example; dmarc=none
+Return-Path: <noreply@p0slaju-track.example>
+From: "Pos Laju Malaysia" <noreply@p0slaju-track.example>
+To: staff@corp.example
+Subject:
+ Bungkusan anda tidak dapat dihantar / Your parcel could not be delivered
+Date: Thu, 12 Nov 2026 16:40:15 +0800
+Message-ID: <ER4471923MY@p0slaju-track.example>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============3242298934025981287=="
+
+--===============3242298934025981287==
+Content-Type: multipart/alternative;
+ boundary="===============7331629004854954131=="
+
+--===============7331629004854954131==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Pelanggan yang dihormati,
+
+Bungkusan ER4471923MY tidak dapat dihantar kerana alamat tidak lengkap. Sila =
+kemas kini maklumat penghantaran dan bayar caj RM2.90 dalam masa 24 jam, jika=
+ tidak bungkusan akan dipulangkan.
+
+Dear customer, your parcel ER4471923MY could not be delivered. Please update =
+your payment details within 24 hours:
+https://p0slaju-track.example/redeliver?id=3DER4471923MY
+
+Label penghantaran dilampirkan.
+
+Pos Laju Malaysia
+
+--===============7331629004854954131==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<p>Pelanggan yang dihormati,</p><p>Bungkusan <b>ER4471923MY</b> tidak dapat d=
+ihantar kerana alamat tidak lengkap. Sila kemas kini maklumat penghantaran da=
+n bayar caj <b>RM2.90</b> dalam masa 24 jam, jika tidak bungkusan akan dipula=
+ngkan.</p><p>Dear customer, your parcel could not be delivered. Please update=
+ your payment details within 24 hours.</p><p><a href=3D"https://p0slaju-track=
+.example/redeliver?id=3DER4471923MY">Jejak &amp; jadual semula penghantaran</=
+a></p><p>Label penghantaran dilampirkan.</p><p>Pos Laju Malaysia</p>
+
+--===============7331629004854954131==--
+
+--===============3242298934025981287==
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="Label_Penghantaran_ER4471923MY.iso"
+MIME-Version: 1.0
+
+UExBQ0VIT0xERVIgLSBub3QgYSByZWFsIGRpc2sgaW1hZ2UuIFNhZmUgdGVzdCBkYXRhLgo=
+
+--===============3242298934025981287==--

@@ -1,0 +1,7 @@
+streamlit>=1.35
+requests>=2.31
+extract-msg>=0.50   # reads Outlook .msg files (drag-and-drop from Outlook)
+opencv-python-headless>=4.8   # reads QR codes hidden in images
+pytest>=8.0
+# optional, only for the AI summary:
+# anthropic

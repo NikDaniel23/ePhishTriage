@@ -1,0 +1,24 @@
+Received: from smtp.partner-logistics.example (smtp.partner-logistics.example
+ [198.51.100.77]) by mx.corp.example; Tue, 10 Nov 2026 14:22:10 +0800
+Authentication-Results: mx.corp.example; spf=pass
+ smtp.mailfrom=partner-logistics.example; dkim=pass
+ header.d=partner-logistics.example; dmarc=pass
+ header.from=partner-logistics.example
+Return-Path: <aina@partner-logistics.example>
+From: "Aina (HR)" <aina@partner-logistics.example>
+Reply-To: aina.hr@mailbox-relay.example
+To: staff@corp.example
+Subject: Shared document: 2027 salary adjustment
+Date: Tue, 10 Nov 2026 14:22:05 +0800
+Message-ID: <doc-5521@partner-logistics.example>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+
+Hi,
+
+Please review the 2027 salary adjustment document before 5pm today:
+https://docs-portal-share.example/view?id=5521
+
+Thanks,
+Aina

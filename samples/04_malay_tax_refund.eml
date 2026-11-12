@@ -1,0 +1,48 @@
+Received: from mail.lhdn-refund.example (unknown [203.0.113.88]) by
+ mx.corp.example; Wed, 11 Nov 2026 08:03:12 +0800
+Authentication-Results: mx.corp.example; spf=softfail
+ smtp.mailfrom=lhdn-refund.example; dkim=none; dmarc=none
+ header.from=lhdn-refund.example
+Return-Path: <notis@lhdn-refund.example>
+From: "LHDN Malaysia - Unit Bayaran Balik" <notis@lhdn-refund.example>
+Reply-To: bayaranbalik.lhdn@mailbox-relay.example
+To: staff@corp.example
+Subject: Notis Bayaran Balik Cukai 2026 - Tindakan Segera Diperlukan
+Date: Wed, 11 Nov 2026 08:03:09 +0800
+Message-ID: <rb-2026-7730@lhdn-refund.example>
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============4385818847938719807=="
+
+--===============4385818847938719807==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Tuan/Puan,
+
+Anda layak menerima bayaran balik cukai sebanyak RM1,284.50 bagi tahun taksir=
+an 2025. Sila sahkan akaun bank anda dalam masa 24 jam, jika tidak tuntutan a=
+nda akan digantung.
+
+Log masuk dengan ID pengguna dan kata laluan MyTax anda, kemudian masukkan no=
+mbor TAC yang dihantar ke telefon anda:
+https://mytax.hasil.gov.my@198.51.100.99/tuntutan/7730
+
+Unit Bayaran Balik
+Lembaga Hasil Dalam Negeri Malaysia
+
+--===============4385818847938719807==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<p>Tuan/Puan,</p><p>Anda layak menerima bayaran balik cukai sebanyak <b>RM1,2=
+84.50</b> bagi tahun taksiran 2025. Sila sahkan akaun bank anda <b>dalam masa=
+ 24 jam</b>, jika tidak tuntutan anda akan digantung.</p><p>Log masuk dengan =
+ID pengguna dan kata laluan MyTax anda, kemudian masukkan nombor TAC yang dih=
+antar ke telefon anda:</p><p><a href=3D"https://lhdn-refund.example/mytax/log=
+in?ref=3D7730">https://mytax.hasil.gov.my/tuntutan</a></p><p>Atau: <a href=3D=
+"https://mytax.hasil.gov.my@198.51.100.99/tuntutan/7730">Tuntut sekarang</a><=
+/p><p>Unit Bayaran Balik<br>Lembaga Hasil Dalam Negeri Malaysia</p>
+
+--===============4385818847938719807==--

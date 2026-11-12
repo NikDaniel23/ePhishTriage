@@ -1,0 +1,103 @@
+{
+  "domain:secure-verify.top": {
+    "malicious": 9,
+    "suspicious": 2,
+    "age_days": 6
+  },
+  "ip:203.0.113.45": {
+    "abuse_score": 87,
+    "country": "??",
+    "isp": "Example Hosting"
+  },
+  "hash:8447f97f4708cfbbd7198e8ca567ad9792a99b7816f0b5fc06aad9a3e66a7195": {
+    "malicious": 14
+  },
+  "domain:kldesignmeetup.example": {
+    "malicious": 0,
+    "suspicious": 0,
+    "age_days": 2140
+  },
+  "ip:198.51.100.20": {
+    "abuse_score": 0,
+    "country": "MY",
+    "isp": "Example Mail"
+  },
+  "domain:partner-logistics.example": {
+    "malicious": 0,
+    "suspicious": 0,
+    "age_days": 1890
+  },
+  "domain:docs-portal-share.example": {
+    "malicious": 0,
+    "suspicious": 0,
+    "age_days": 12
+  },
+  "domain:mailbox-relay.example": {
+    "malicious": 0,
+    "suspicious": 0,
+    "age_days": 400
+  },
+  "ip:198.51.100.77": {
+    "abuse_score": 3,
+    "country": "MY",
+    "isp": "Example Net"
+  },
+  "domain:lhdn-refund.example": {
+    "malicious": 4,
+    "suspicious": 1,
+    "age_days": 3
+  },
+  "ip:203.0.113.88": {
+    "abuse_score": 64,
+    "country": "??",
+    "isp": "Example VPS"
+  },
+  "ip:198.51.100.99": {
+    "abuse_score": 52,
+    "country": "??",
+    "isp": "Example VPS"
+  },
+  "ip:192.0.2.41": {
+    "abuse_score": 0,
+    "country": "US",
+    "isp": "Example Webmail"
+  },
+  "domain:c0rp.example": {
+    "malicious": 0,
+    "suspicious": 0,
+    "age_days": 4
+  },
+  "ip:198.51.100.66": {
+    "abuse_score": 12,
+    "country": "MY",
+    "isp": "Example VPS"
+  },
+  "domain:m365-notice.example": {
+    "malicious": 0,
+    "suspicious": 0,
+    "age_days": 9
+  },
+  "domain:m365-reauth.example": {
+    "malicious": 2,
+    "suspicious": 1,
+    "age_days": 2
+  },
+  "ip:198.51.100.140": {
+    "abuse_score": 21,
+    "country": "??",
+    "isp": "Example VPS"
+  },
+  "hash:7aa281440c36adf35c38385b19e132f09b4e387ac79cc10ce0b5831238b1179a": {
+    "malicious": 0
+  },
+  "domain:voice-notify.example": {
+    "malicious": 0,
+    "suspicious": 0,
+    "age_days": 35
+  },
+  "ip:198.51.100.151": {
+    "abuse_score": 8,
+    "country": "??",
+    "isp": "Example VPS"
+  }
+}

@@ -1,0 +1,30 @@
+# Comments must sit on their own line: Git reads "x  # note" as the pattern
+# "x  # note", which matches nothing.
+
+# --- Secrets: never commit these -------------------------------------------
+# API keys live in Infisical and reach the app as environment variables
+# (see GUIDE.md, "Going live"). These are where keys usually leak from.
+.env
+.env.*
+*.pem
+*.key
+.streamlit/secrets.toml
+# .infisical.yaml is SAFE to commit: it only links this folder to an
+# Infisical project ID and holds no secret values.
+
+# --- Local data ---------------------------------------------------------------
+# Case history: senders and subjects of every triaged email. Sensitive.
+.cache/
+# Design-tool screenshots and logs.
+.hallmark/
+
+# --- Python -------------------------------------------------------------------
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# --- Local tooling (editor and AI-assistant settings, not part of the app) ----
+.claude/
+.agents/

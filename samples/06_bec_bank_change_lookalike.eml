@@ -1,0 +1,28 @@
+Received: from mail.c0rp.example (mail.c0rp.example [198.51.100.66]) by
+ mx.corp.example; Thu, 12 Nov 2026 14:41:30 +0800
+Authentication-Results: mx.corp.example; spf=pass smtp.mailfrom=c0rp.example;
+ dkim=pass header.d=c0rp.example; dmarc=pass header.from=c0rp.example
+Return-Path: <accounts@c0rp.example>
+From: "Finance Department" <accounts@c0rp.example>
+To: payables@corp.example
+Subject: Updated bank details for INV-2026-0912 / Butiran bank baharu
+Date: Thu, 12 Nov 2026 14:41:22 +0800
+Message-ID: <inv-0912@c0rp.example>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+Hi Payables team,
+
+Please note our banking details have changed following our audit. For invoice=
+ INV-2026-0912 (RM48,250.00), please process the payment today to the new ban=
+k account below and discard the old details.
+
+Bank: Example Bank Berhad
+Account name: Corp Example Sdn Bhd
+Account number: 0000-0000-0000 (sample)
+
+Sila buat bayaran segera ke akaun bank baru di atas.
+
+Thank you,
+Finance Department

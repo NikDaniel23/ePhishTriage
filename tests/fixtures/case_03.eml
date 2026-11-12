@@ -1,0 +1,62 @@
+Return-Path: <bounce@lineprint.invalid>
+Received: from relay.lineprint.invalid (relay.lineprint.invalid
+ [198.51.100.33]) by mx1.northline-studio.invalid with ESMTPS id NL-0003; Thu,
+ 12 Nov 2026 10:03:04 +0800
+Authentication-Results: mx1.northline-studio.invalid; spf=pass
+ smtp.mailfrom=lineprint.invalid; dkim=pass header.d=lineprint.invalid;
+ dmarc=pass header.from=lineprint.invalid
+From: Plot Services <plotdesk@lineprint.invalid>
+To: Studio Operations <operations@northline-studio.invalid>
+Date: Thu, 12 Nov 2026 10:03:00 +0800
+Subject: Re: A1 plot run | receipt attached
+Message-ID: <case-03.20261112@lineprint.invalid>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============0106289130839306294=="
+
+--===============0106289130839306294==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Operations,
+
+Job LP-2231 has cleared the queue. The plot system generated the attached
+receipt for your records. Please review it before collecting the set.
+
+Thanks,
+Plot Desk
+
+--===============0106289130839306294==
+Content-Type: message/rfc822
+Content-Transfer-Encoding: 8bit
+Content-Disposition: attachment; filename="LP-2231-Receipt.eml"
+MIME-Version: 1.0
+
+From: LinePrint Receipts <receipts@lineprint.invalid>
+To: Studio Operations <operations@northline-studio.invalid>
+Subject: Job LP-2231 | Collection receipt
+Date: Thu, 12 Nov 2026 10:02:58 +0800
+Message-ID: <lp-2231.receipt@lineprint.invalid>
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============4812344664067557936=="
+
+--===============4812344664067557936==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Job LP-2231 | Collection receipt. Open in an HTML-capable reader to view the =
+receipt reference.
+
+--===============4812344664067557936==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body><p>Job LP-2231 is ready for collection.</p>
+<p><a href=3D"https://receipt-review.invalid/jobs/lp-2231">View collection re=
+ceipt</a></p>
+</body></html>
+
+--===============4812344664067557936==--
+
+--===============0106289130839306294==--

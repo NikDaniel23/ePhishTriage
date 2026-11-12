@@ -1,0 +1,26 @@
+Return-Path: <bounce@mailbridge.invalid>
+Received: from relay.mailbridge.invalid (relay.mailbridge.invalid
+ [198.51.100.22]) by mx1.northline-studio.invalid with ESMTPS id NL-0002; Thu,
+ 12 Nov 2026 10:02:04 +0800
+Authentication-Results: mx1.northline-studio.invalid; spf=pass
+ smtp.mailfrom=mailbridge.invalid; dkim=fail header.d=mailbridge.invalid;
+ dmarc=fail header.from=buildform.invalid
+From: BuildForm Notifications <updates@buildform.invalid>
+To: Studio Operations <operations@northline-studio.invalid>
+Date: Thu, 12 Nov 2026 10:02:00 +0800
+Subject: Submittal 0842 returned for revision
+Message-ID: <case-02.20261112@buildform.invalid>
+List-Id: Riverside coordination <riverside.mailbridge.invalid>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+
+Submittal 0842 | Roof drainage package
+
+Status: Returned for revision
+The reviewer added two comments to the drainage detail. Open the project
+record to review the comments before resubmitting.
+
+https://portal.buildform.invalid/projects/riverside/submittals/0842
+
+Riverside coordination list

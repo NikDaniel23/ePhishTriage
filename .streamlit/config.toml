@@ -1,0 +1,49 @@
+# Charcoal console look: near-black main area, lighter grey sidebar,
+# lavender primary actions, Inter for reading, JetBrains Mono for labels,
+# table heads and button text. These keys style Streamlit's own widgets;
+# ui/console.css styles the cards, tables and nav.
+[theme]
+base = "dark"
+primaryColor = "#c3c6ff"              # lavender: primary buttons, toggles, focus
+backgroundColor = "#141414"
+secondaryBackgroundColor = "#1d1d1d"
+codeBackgroundColor = "#101010"
+textColor = "#ececec"
+linkColor = "#9fb8ff"
+borderColor = "#2e2e2e"
+codeTextColor = "#d6d6d6"
+showWidgetBorder = true
+showSidebarBorder = false
+baseRadius = "10px"
+buttonRadius = "8px"
+font = "'Inter':https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+headingFont = "'Inter':https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap"
+codeFont = "'JetBrains Mono':https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap"
+baseFontSize = 14
+codeFontSize = "13px"
+linkUnderline = false
+paddingTop = "1.5rem"
+paddingBottom = "4rem"
+
+greenColor = "#5fd38a"
+redColor = "#ff6b63"
+yellowColor = "#f2c14e"
+orangeColor = "#ff9a52"
+blueColor = "#9fb8ff"
+violetColor = "#c3c6ff"
+grayColor = "#a3a3a3"
+
+dataframeBorderColor = "#2e2e2e"
+dataframeHeaderBackgroundColor = "#1d1d1d"
+dataframeHeaderTextColor = "#a3a3a3"
+
+[theme.sidebar]
+backgroundColor = "#2a2a2a"
+secondaryBackgroundColor = "#333333"
+codeBackgroundColor = "#333333"
+textColor = "#e2e2e2"
+borderColor = "#3d3d3d"
+primaryColor = "#c3c6ff"
+
+[client]
+toolbarMode = "minimal"

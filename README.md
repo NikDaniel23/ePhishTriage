@@ -37,7 +37,7 @@ ePhishTriage does that groundwork and shows its evidence. **The analyst still de
 - Your decision: the analyst's final verdict is saved, and the agreement rate with the tool is shown
 - A Markdown ticket ready to paste, with every indicator defanged
 
-**Beyond triage** (tabs along the top of the app)
+**Beyond triage** (pages in the left-hand menu)
 - **Shift report**: reports per day by verdict, what is still open, attack types, most targeted staff, tool-vs-analyst agreement, and a handover note ready to paste into the shift log
 - **Domain watch**: searches public Certificate Transparency logs (crt.sh) for look-alikes of your own and your suppliers' domains, so they can be blocked before the first phishing email arrives. Review each one, then export a block list or a hunt query
 - **IOC workbench**: paste a threat report, advisory or chat message (defanged text is fine); every URL, domain, IP, address, hash and CVE is extracted, looked up, and exported as a validated block list, a defanged list or a ticket table

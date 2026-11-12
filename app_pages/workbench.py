@@ -9,14 +9,14 @@ from triage.enrich import Enricher
 from triage.org import load_org
 from triage.workbench import (MAX_TEXT, blocklist, defanged_list, extract, lookup,
                               ticket_table)
-from ui.kit import empty, page_header, section, show, stat_cards
+from ui.kit import empty, page_header, pill, section, show, stat_cards
 
 ROOT = Path(__file__).resolve().parent.parent
 org = load_org()
 st.session_state.setdefault("wb_ver", 0)
 
 with st.sidebar:
-    st.header("Lookups")
+    st.header("Intel source")
     live = st.toggle("Live API lookups", value=False, key="wb_live",
                      help="Off = demo intel in samples/mock_intel.json. "
                           "On = VirusTotal / AbuseIPDB, keys from the environment.")
@@ -31,7 +31,8 @@ with st.sidebar:
 
 page_header("IOC workbench",
             "Paste a threat report, an advisory or a chat message. Defanged text is fine: "
-            "every indicator is pulled out, looked up and made ready to block.")
+            "every indicator is pulled out, looked up and made ready to block.",
+            right=pill("Live intel" if live else "Demo intel", "live" if live else "off"))
 
 
 def load_example() -> None:
@@ -44,17 +45,29 @@ def from_file() -> None:
         st.session_state["wb_text"] = f.getvalue()[:MAX_TEXT].decode("utf-8", "replace")
 
 
-text = st.text_area("Text to analyse", key="wb_text", height=220, max_chars=MAX_TEXT,
-                    placeholder="hxxp://evil[.]com/login, 203.0.113.45, a sha256 hash, "
-                                "an email address...", label_visibility="collapsed")
-with st.container(horizontal=True, vertical_alignment="center"):
-    run = st.button("Extract and look up", key="extract", icon=":material/biotech:",
-                    disabled=not text.strip())
-    st.button("Load example", key="wb_example", icon=":material/description:",
-              on_click=load_example)
-    st.file_uploader("Or load a text file", type=["txt", "csv", "log", "md", "json", "eml"],
-                     key=f"wb_file-{st.session_state['wb_ver']}", on_change=from_file,
-                     label_visibility="collapsed")
+def clear() -> None:
+    st.session_state["wb_text"] = ""
+    st.session_state.pop("wb_found", None)
+    st.session_state["wb_ver"] += 1
+
+
+with st.container(key="card-input"):
+    tab_paste, tab_file = st.tabs(["Paste text", "Upload a file"])
+    with tab_paste:
+        text = st.text_area("Text to analyse", key="wb_text", height=200, max_chars=MAX_TEXT,
+                            placeholder="hxxp://evil[.]com/login, 203.0.113.45, a sha256 hash, "
+                                        "an email address...", label_visibility="collapsed")
+    with tab_file:
+        st.file_uploader("Load a text file", type=["txt", "csv", "log", "md", "json", "eml"],
+                         key=f"wb_file-{st.session_state['wb_ver']}", on_change=from_file,
+                         help="Its text is copied into the Paste text tab.")
+    with st.container(horizontal=True, vertical_alignment="center"):
+        run = st.button("Extract and look up", key="extract", icon=":material/biotech:",
+                        disabled=not text.strip())
+        st.button("Load example", key="wb_example", icon=":material/description:",
+                  on_click=load_example)
+        st.button("Clear", key="wb_clear", icon=":material/backspace:", on_click=clear,
+                  disabled=not text.strip() and "wb_found" not in st.session_state)
 
 if run:
     with st.spinner("Extracting and looking up..."):

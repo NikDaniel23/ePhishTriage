@@ -8,19 +8,19 @@ from triage.history import History
 from triage.iocs import defang
 from triage.sanitize import clean
 from triage.shift import VERDICT_WORD, handover_markdown, summarise
-from ui.kit import empty, page_header, section, show, stat_cards
+from ui.kit import empty, page_header, pill, section, show, stat_cards
 
 ROOT = Path(__file__).resolve().parent.parent
 history = History(ROOT / ".cache" / "cases.db")
 
-with st.sidebar:
-    st.header("Report period")
+header_slot = st.container()  # filled once the period is known
+with st.container(horizontal=True, vertical_alignment="bottom", key="shift-controls"):
     period = st.segmented_control(
         "Period", ["This shift", "Today", "7 days", "30 days"], default="This shift",
-        key="shift_period", label_visibility="collapsed")
+        key="shift_period")
     shift_hours = st.number_input("Shift length (hours)", 1, 24, 8, key="shift_hours",
+                                  width=170, disabled=period not in (None, "This shift"),
                                   help='"This shift" covers this many hours back from now.')
-    analyst = st.text_input("Your name (optional)", key="shift_analyst", max_chars=80)
 
 now = datetime.now().replace(microsecond=0)
 since = {
@@ -30,25 +30,27 @@ since = {
     "30 days": now - timedelta(days=30),
 }[period or "This shift"]
 
-page_header("Shift report", f"{since:%d %b %Y, %H:%M} to now. Built from the case history.")
+with header_slot:
+    page_header("Shift report", "What came in, what is still open, and the note for the next shift.",
+                right=pill(f"{since:%d %b, %H:%M} to now"))
 rows = history.between(since)
 stats = summarise(rows)
 campaigns = history.campaigns_between(since)
 
 if not rows:
     empty("No emails were triaged in this period. Triage some on the Triage page, "
-          "or choose a longer period in the sidebar.")
+          "or choose a longer period above.")
     st.stop()
 
 mal = stats.by_verdict.get("MALICIOUS", 0)
 agree = (f"{stats.agreed / stats.decided:.0%}<small> of {stats.decided}</small>"
-         if stats.decided else "-<small> none decided</small>")
+         if stats.decided else "-<small> none yet</small>")
 stat_cards([
     ("Reports", f"{stats.total}", "inbox", ""),
     ("Malicious", f"{mal}", "gpp_bad", "red" if mal else ""),
     ("Needs a decision", f"{len(stats.open_risky)}", "pending_actions",
      "amber" if stats.open_risky else "green"),
-    ("Tool agreed with analyst", agree, "rule", "lav"),
+    ("Tool agreement", agree, "rule", "lav"),
 ])
 
 # ------------------------------------------------------------- needs attention
@@ -105,13 +107,19 @@ with c2:
         empty("No malicious or suspicious senders in this period.")
 
 # ------------------------------------------------------------- handover
-show(section("handover", "Handover note",
-             "Ready to paste into the shift log or chat. Add anything the numbers do not say."))
-notes = st.text_area("Notes for the next shift", key="shift_notes", height=110,
-                     placeholder="e.g. Finance warned about the Oakspan payment change; "
-                                 "waiting on L2 for the device-portal campaign.")
+head, act = st.columns([4, 1], vertical_alignment="bottom")
+with head:
+    show(section("handover", "Handover note",
+                 "Ready to paste into the shift log or chat. Add anything the numbers do not say."))
+write, preview = st.columns([2, 3])
+with write:
+    analyst = st.text_input("Your name (optional)", key="shift_analyst", max_chars=80)
+    notes = st.text_area("Notes for the next shift", key="shift_notes", height=180,
+                         placeholder="e.g. Finance warned about the Oakspan payment change; "
+                                     "waiting on L2 for the device-portal campaign.")
 note_md = handover_markdown(stats, campaigns, since, now, notes=notes, analyst=analyst)
-with st.container(key="card-ticket"):
-    st.code(note_md, language="markdown")
-st.download_button("Download handover (.md)", note_md, key="export", icon=":material/download:",
-                   file_name=f"handover_{now:%Y%m%d_%H%M}.md")
+with preview, st.container(key="card-ticket"):
+    st.code(note_md, language="markdown", height=360)
+with act:
+    st.download_button("Export handover", note_md, key="export", width="stretch",
+                       icon=":material/download:", file_name=f"handover_{now:%Y%m%d_%H%M}.md")

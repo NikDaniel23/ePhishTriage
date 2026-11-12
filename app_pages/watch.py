@@ -11,7 +11,7 @@ from triage.org import load_org
 from triage.respond import DOMAIN_OK
 from triage.watch import (blocklist, fetch_ct, genuine_domains, hunt_query, load_demo,
                           scan, watch_terms)
-from ui.kit import empty, page_header, raw_esc, section, show, stat_cards
+from ui.kit import empty, icon, page_header, pill, raw_esc, section, show, stat_cards
 
 ROOT = Path(__file__).resolve().parent.parent
 history = History(ROOT / ".cache" / "cases.db")
@@ -26,25 +26,32 @@ with st.sidebar:
     if live:
         st.caption(":material/info: Live mode sends the watched names to crt.sh, a public "
                    "service. Searches can take up to a minute each.")
-    extra_raw = st.text_input("Also watch (comma-separated domains)", key="watch_extra",
-                              placeholder="mycompany.com, mysupplier.com",
-                              help="Added to the domains in org.json for this session.")
+extra_raw = st.session_state.get("watch_extra", "")
 extra = [d.strip().lower() for d in extra_raw.split(",") if DOMAIN_OK.match(d.strip().lower())]
 terms = watch_terms(org, extra)
+rows = history.watch_list()
+last = max((r["last_checked"] for r in rows), default="")
 
 page_header("Domain watch",
-            "Attackers need a certificate for their fake login page, and every certificate is "
-            "published. Catch look-alikes of our domains before the first email arrives.")
+            "Find look-alikes of our domains in public certificate logs, before the first "
+            "phishing email arrives.",
+            right=pill("Live: crt.sh" if live else "Demo certificates", "live" if live else "off")
+            + pill(f"Last checked {last.replace('T', ' ')[:16]}" if last else "Never checked"))
 
 watched = sorted(genuine_domains(org) | set(extra))
-show('<div class="card"><span class="label">Watching</span><div class="tags" style="margin:4px 0 0">'
-     + "".join(f'<span class="chip">{raw_esc(d)}</span>' for d in watched)
-     + '</div><p class="empty" style="padding:8px 0 0">Edit org.json to change the list '
-       "permanently. Searched by name: "
-     + raw_esc(", ".join(terms)) + ".</p></div>")
+with st.container(key="card-watching"):
+    info, action = st.columns([3, 1], vertical_alignment="center")
+    with info:
+        show('<span class="label">Watching</span><div class="tags" style="margin:4px 0 0">'
+             + "".join(f'<span class="chip">{raw_esc(d)}</span>' for d in watched) + "</div>")
+        st.text_input("Also watch", key="watch_extra", label_visibility="collapsed",
+                      placeholder="Also watch, for this session: mycompany.com, supplier.com",
+                      help="Added to the domains in org.json. Edit org.json to keep them.")
+    with action:
+        check = st.button("Check now", key="check-now", icon=":material/radar:",
+                          type="primary", width="stretch", disabled=not terms)
 
-if st.button("Check certificate logs now", key="check-now", icon=":material/radar:",
-             type="primary", disabled=not terms):
+if check:
     records, failed = [], []
     with st.status("Searching certificate logs...", expanded=False) as box:
         if live:
@@ -66,10 +73,21 @@ if st.button("Check certificate logs now", key="check-now", icon=":material/rada
     st.toast(f"{new} new look-alike{'s' if new != 1 else ''} found" if new
              else "No new look-alikes", icon=":material/radar:")
     st.session_state["wedit_ver"] += 1
+    rows = history.watch_list()
 
-rows = history.watch_list()
 if not rows:
-    empty("No look-alikes on record yet. Press \"Check certificate logs now\".")
+    show(f"""
+<div class="grid3" style="margin-top:14px">
+  <div class="card tip">{icon("radar")}<div><b>1. Check</b>
+    <span>Search public certificate logs for names like ours. Every HTTPS site needs a
+    certificate, so a fake login page shows up here first.</span></div></div>
+  <div class="card tip">{icon("rule")}<div><b>2. Review</b>
+    <span>Each look-alike is explained and ranked. Mark it blocked, or benign if it is a
+    partner or campaign site.</span></div></div>
+  <div class="card tip">{icon("block")}<div><b>3. Act</b>
+    <span>Export a block list for the gateway and proxy, and a query to see whether the
+    domain has already emailed us.</span></div></div>
+</div>""")
     st.stop()
 
 n_new = sum(r["status"] == "new" for r in rows)

@@ -38,9 +38,19 @@ def section(sid: str, title: str, subtitle: str) -> str:
             f"<p>{subtitle}</p></div></div></div>")
 
 
-def page_header(title: str, subtitle: str) -> None:
+def pill(text: str, dot: str = "") -> str:
+    """A small status chip for the page header. dot: '' | 'live' | 'off'."""
+    if dot:
+        return (f'<span class="pill{" live" if dot == "live" else ""}"><span class="dot"></span>'
+                f"{raw_esc(text)}</span>")
+    return f'<span class="pill">{raw_esc(text)}</span>'
+
+
+def page_header(title: str, subtitle: str, right: str = "") -> None:
+    """Same header on every page: title and one line of purpose, status pills on the right."""
     show(f'<header class="top"><div><h1>{raw_esc(title)}</h1>'
-         f"<p>{raw_esc(subtitle)}</p></div></header>")
+         f"<p>{raw_esc(subtitle)}</p></div>"
+         f'<div class="top-right">{right}</div></header>')
 
 
 def stat_cards(cards: list[tuple[str, str, str, str]]) -> None:

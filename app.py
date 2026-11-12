@@ -30,6 +30,7 @@ pages = st.navigation(
         st.Page("app_pages/watch.py", title="Domain watch", icon=":material/travel_explore:"),
         st.Page("app_pages/workbench.py", title="IOC workbench", icon=":material/biotech:"),
     ],
-    position="top",
+    position="sidebar",
+    expanded=True,
 )
 pages.run()

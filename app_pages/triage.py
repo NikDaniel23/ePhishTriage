@@ -109,10 +109,11 @@ def render_nav(badges: dict[str, str] | None) -> None:
         items = "".join(
             f'<span class="off" aria-disabled="true">{icon(ic)}{label}</span>'
             for _, ic, label in NAV)
-        html_ = (f'<nav class="nav idle" aria-label="Sections">{items}</nav>'
+        html_ = ('<span class="label nav-label">On this page</span>'
+                 f'<nav class="nav idle" aria-label="Sections">{items}</nav>'
                  '<p class="nav-hint">Sections open when an email is loaded.</p>')
     else:
-        html_ = '<nav class="nav" aria-label="Sections">' + "".join(
+        html_ = '<span class="label nav-label">On this page</span><nav class="nav" aria-label="Sections">' + "".join(
             f'<a href="#{sid}">{icon(ic)}{label}{badges.get(sid, "")}</a>'
             for sid, ic, label in NAV) + "</nav>"
     with nav_slot:
@@ -183,7 +184,7 @@ def header(file_name: str) -> None:
 <header class="top">
   <div><h1>Email triage</h1>
     <p>Analysing <code>{esc(file_name) or "no email loaded"}</code></p></div>
-  <div style="display:flex;gap:8px;flex-wrap:wrap">{mode}<span class="pill">{now}</span></div>
+  <div class="top-right">{mode}<span class="pill">{now}</span></div>
 </header>""")
 
 

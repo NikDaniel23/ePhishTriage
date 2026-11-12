@@ -309,7 +309,7 @@ Design decisions worth explaining:
 
 ## 8c. Beyond triage: three tools for the rest of the shift
 
-The app has four pages, in the bar along the top.
+The app has four pages, listed at the top of the left-hand menu.
 
 ### Shift report (`triage/shift.py`, `app_pages/shift.py`)
 At the end of every shift someone writes the same summary by hand. Everything except the free-text notes is already in the case history, so the page builds it: reports per day by verdict, what is still open (malicious or suspicious with no analyst decision), attack types, most targeted staff, the senders behind the bad ones, tool-vs-analyst agreement and median time to a decision. The handover note is Markdown, made safe like the ticket, with your own notes added at the end.
